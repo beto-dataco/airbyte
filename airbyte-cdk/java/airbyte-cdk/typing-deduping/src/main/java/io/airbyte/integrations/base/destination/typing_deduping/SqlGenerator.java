@@ -45,15 +45,16 @@ public interface SqlGenerator<DialectTableDefinition> {
   boolean existingSchemaMatchesStreamConfig(final StreamConfig stream, final DialectTableDefinition existingTable);
 
   /**
-   * SQL Statement which will rebuild the final table using the raw table data. Should not cause data downtime. Typically, this will resemble "create
-   * tmp_table; update raw_table set loaded_at=null; (t+d into tmp table); (overwrite final table from tmp table);"
+   * SQL Statement which will rebuild the final table using the raw table data. Should not cause data
+   * downtime. Typically, this will resemble "create tmp_table; update raw_table set loaded_at=null;
+   * (t+d into tmp table); (overwrite final table from tmp table);"
    *
    * @param stream the stream to rebuild
    */
   default String softReset(final StreamConfig stream) {
-    final String createTempTable = createTable(stream, SOFT_RESET_SUFFIX);
+    final String createTempTable = createTable(stream, SOFT_RESET_SUFFIX, false);
     final String clearLoadedAt = clearLoadedAt(stream.id());
-    final String rebuildInTempTable = updateTable(stream, SOFT_RESET_SUFFIX, false);
+    final String rebuildInTempTable = updateTable(stream, SOFT_RESET_SUFFIX, Optional.empty(), false);
     final String overwriteFinalTable = overwriteFinalTable(stream.id(), SOFT_RESET_SUFFIX);
     return String.join("\n", createTempTable, clearLoadedAt, rebuildInTempTable, overwriteFinalTable);
   }
