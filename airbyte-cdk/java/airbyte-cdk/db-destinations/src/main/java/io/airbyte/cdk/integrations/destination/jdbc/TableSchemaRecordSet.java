@@ -1,5 +1,9 @@
-package io.airbyte.integrations.destination.jdbc;
+/*
+ * Copyright (c) 2023 Airbyte, Inc., all rights reserved.
+ */
 
-public record TableSchemaRecordSet {
+package io.airbyte.cdk.integrations.destination.jdbc;
+
+public record TableSchemaRecordSet() {
 
 }

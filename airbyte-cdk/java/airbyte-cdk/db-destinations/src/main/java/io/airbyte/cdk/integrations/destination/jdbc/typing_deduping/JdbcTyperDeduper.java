@@ -1,26 +1,33 @@
-package io.airbyte.integrations.destination.jdbc.typing_deduping;
+package io.airbyte.cdk.integrations.destination.jdbc.typing_deduping;
 
-import io.airbyte.db.jdbc.JdbcDatabase;
+import io.airbyte.cdk.db.jdbc.JdbcDatabase;
 import io.airbyte.integrations.base.destination.typing_deduping.DefaultTyperDeduper;
 import io.airbyte.integrations.base.destination.typing_deduping.DestinationHandler;
+import io.airbyte.integrations.base.destination.typing_deduping.DestinationV1V2Migrator;
 import io.airbyte.integrations.base.destination.typing_deduping.ParsedCatalog;
 import io.airbyte.integrations.base.destination.typing_deduping.SqlGenerator;
 import io.airbyte.integrations.base.destination.typing_deduping.TyperDeduper;
+import io.airbyte.integrations.base.destination.typing_deduping.V2TableMigrator;
 
 public class JdbcTyperDeduper extends DefaultTyperDeduper<JdbcDatabase> implements TyperDeduper {
 
-  public JdbcTyperDeduper(SqlGenerator<JdbcDatabase> sqlGenerator, DestinationHandler<JdbcDatabase> destinationHandler, ParsedCatalog parsedCatalog) {
-    super(sqlGenerator, destinationHandler, parsedCatalog);
+  public JdbcTyperDeduper(final SqlGenerator<JdbcDatabase> sqlGenerator,
+                          final DestinationHandler<JdbcDatabase> destinationHandler,
+                          final ParsedCatalog parsedCatalog,
+                          final DestinationV1V2Migrator<JdbcDatabase> v1V2Migrator,
+                          final V2TableMigrator v2TableMigrator,
+                          final int defaultThreadCount) {
+    super(sqlGenerator, destinationHandler, parsedCatalog, v1V2Migrator, v2TableMigrator, defaultThreadCount);
   }
 
   @Override
-  public void prepareFinalTables() throws Exception {
-    super.prepareFinalTables();
+  public void prepareTables() throws Exception {
+    super.prepareTables();
   }
 
   @Override
-  public void typeAndDedupe(String originalNamespace, String originalName) throws Exception {
-    super.typeAndDedupe(originalNamespace, originalName);
+  public void typeAndDedupe(final String originalNamespace, final String originalName, final boolean mustRun) throws Exception {
+    super.typeAndDedupe(originalNamespace, originalName, mustRun);
   }
 
   @Override

@@ -38,7 +38,7 @@ class MockSqlGenerator implements SqlGenerator<String> {
   }
 
   @Override
-  public String updateTable(final StreamConfig stream, final String finalSuffix, final Optional<Instant> minRawTimestamp) {
+  public String updateTable(final StreamConfig stream, final String finalSuffix, final Optional<Instant> minRawTimestamp, final boolean verifyPrimaryKeys) {
     final String timestampFilter = minRawTimestamp
         .map(timestamp -> " WHERE extracted_at > " + timestamp)
         .orElse("");
@@ -53,6 +53,11 @@ class MockSqlGenerator implements SqlGenerator<String> {
   @Override
   public String migrateFromV1toV2(final StreamId streamId, final String namespace, final String tableName) {
     return "MIGRATE TABLE " + String.join(".", namespace, tableName) + " TO " + streamId.rawTableId("");
+  }
+
+  @Override
+  public String clearLoadedAt(final StreamId streamId) {
+    return null;
   }
 
 }

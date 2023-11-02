@@ -6,6 +6,7 @@ package io.airbyte.cdk.integrations.destination.jdbc.typing_deduping;
 
 import io.airbyte.cdk.db.jdbc.JdbcDatabase;
 import io.airbyte.cdk.integrations.destination.NamingConventionTransformer;
+import io.airbyte.cdk.integrations.destination.jdbc.CustomSqlType;
 import io.airbyte.cdk.integrations.destination.jdbc.SqlOperations;
 import io.airbyte.integrations.base.destination.typing_deduping.AirbyteProtocolType;
 import io.airbyte.integrations.base.destination.typing_deduping.AirbyteType;
@@ -19,7 +20,6 @@ import io.airbyte.integrations.base.destination.typing_deduping.TableNotMigrated
 import io.airbyte.integrations.base.destination.typing_deduping.TypeAndDedupeQueryBuilder;
 import io.airbyte.integrations.base.destination.typing_deduping.Union;
 import io.airbyte.integrations.base.destination.typing_deduping.UnsupportedOneOf;
-import io.airbyte.integrations.destination.jdbc.CustomSqlType;
 import io.airbyte.integrations.destination.jdbc.TypeInfoRecordSet;
 import java.sql.Connection;
 import java.sql.JDBCType;
