@@ -1,0 +1,536 @@
+version: 0.51.41
+type: DeclarativeSource
+check:
+  type: CheckStream
+  stream_names:
+    - ColorCollection
+streams:
+  - type: DeclarativeStream
+    name: ColorCollection
+    primary_key: []
+    schema_loader:
+      type: InlineSchemaLoader
+      schema:
+        $schema: http://json-schema.org/schema#
+        properties:
+          categoricalPalettes:
+            items:
+              properties:
+                colors:
+                  items:
+                    type: string
+                  type: array
+                id:
+                  type: string
+                label:
+                  type: string
+                type:
+                  type: string
+              type: object
+            type: array
+          divergingPalettes:
+            items:
+              properties:
+                id:
+                  type: string
+                label:
+                  type: string
+                stops:
+                  items:
+                    properties:
+                      color:
+                        type: string
+                      offset:
+                        type: number
+                    type: object
+                  type: array
+                type:
+                  type: string
+              type: object
+            type: array
+          id:
+            type: string
+          label:
+            type: string
+          sequentialPalettes:
+            items:
+              properties:
+                id:
+                  type: string
+                label:
+                  type: string
+                stops:
+                  items:
+                    properties:
+                      color:
+                        type: string
+                      offset:
+                        type: number
+                    type: object
+                  type: array
+                type:
+                  type: string
+              type: object
+            type: array
+        type: object
+    retriever:
+      type: SimpleRetriever
+      requester:
+        type: HttpRequester
+        url_base: https://looker.dtcco.io:443/api/4.0
+        path: color_collections
+        http_method: GET
+        request_parameters: {}
+        request_headers: {}
+        authenticator:
+          type: OAuthAuthenticator
+          client_id: '{{ config[''client_id''] }}'
+          client_secret: '{{ config[''client_secret''] }}'
+          refresh_request_body: {}
+          token_refresh_endpoint: https://looker.dtcco.io:443/api/4.0/login
+          grant_type: client_credentials
+        request_body_json: {}
+      record_selector:
+        type: RecordSelector
+        extractor:
+          type: DpathExtractor
+          field_path: []
+      paginator:
+        type: NoPagination
+  - type: DeclarativeStream
+    name: Connection
+    primary_key: []
+    schema_loader:
+      type: InlineSchemaLoader
+      schema:
+        $schema: http://json-schema.org/schema#
+        properties:
+          can:
+            properties:
+              access_data:
+                type: boolean
+              attach_model:
+                type: boolean
+              cost_estimate:
+                type: boolean
+              create:
+                type: boolean
+              destroy:
+                type: boolean
+              explore:
+                type: boolean
+              index:
+                type: boolean
+              index_details:
+                type: boolean
+              index_limited:
+                type: boolean
+              manage_details:
+                type: boolean
+              refresh_schemas:
+                type: boolean
+              run_sql_queries:
+                type: boolean
+              show:
+                type: boolean
+              show_details:
+                type: boolean
+              test:
+                type: boolean
+              update:
+                type: boolean
+            type: object
+          dialect:
+            properties:
+              automatically_run_sql_runner_snippets:
+                type: boolean
+              connection_tests:
+                items:
+                  type: string
+                type: array
+              cost_estimate_style:
+                type: string
+              has_ssl_support:
+                type: boolean
+              label:
+                type: string
+              name:
+                type: string
+              persistent_table_distkey:
+                type: string
+              persistent_table_indexes:
+                type: string
+              persistent_table_sortkeys:
+                type: string
+              supports_cost_estimate:
+                type: boolean
+              supports_inducer:
+                type: boolean
+              supports_multiple_databases:
+                type: boolean
+              supports_persistent_derived_tables:
+                type: boolean
+              supports_streaming:
+                type: boolean
+            type: object
+          name:
+            type: string
+          pdts_enabled:
+            type: boolean
+          snippets:
+            items:
+              properties:
+                label:
+                  type: string
+                name:
+                  type: string
+                sql:
+                  type: string
+              type: object
+            type: array
+        type: object
+    retriever:
+      type: SimpleRetriever
+      requester:
+        type: HttpRequester
+        url_base: https://looker.dtcco.io:443/api/4.0
+        path: connections
+        http_method: GET
+        request_parameters: {}
+        request_headers: {}
+        authenticator:
+          type: OAuthAuthenticator
+          client_id: '{{ config[''client_id''] }}'
+          client_secret: '{{ config[''client_secret''] }}'
+          refresh_request_body: {}
+          token_refresh_endpoint: https://looker.dtcco.io:443/api/4.0/login
+          grant_type: client_credentials
+        request_body_json: {}
+      record_selector:
+        type: RecordSelector
+        extractor:
+          type: DpathExtractor
+          field_path: []
+      paginator:
+        type: NoPagination
+  - type: DeclarativeStream
+    name: ContentMetadata
+    primary_key: []
+    schema_loader:
+      type: InlineSchemaLoader
+      schema:
+        $schema: http://json-schema.org/draft-07/schema#
+        additionalProperties: true
+        properties: {}
+        type: object
+    retriever:
+      type: SimpleRetriever
+      requester:
+        type: HttpRequester
+        url_base: https://looker.dtcco.io:443/api/4.0
+        path: content_metadata
+        http_method: GET
+        request_parameters: {}
+        request_headers: {}
+        authenticator:
+          type: OAuthAuthenticator
+          client_id: '{{ config[''client_id''] }}'
+          client_secret: '{{ config[''client_secret''] }}'
+          refresh_request_body: {}
+          token_refresh_endpoint: https://looker.dtcco.io:443/api/4.0/login
+          grant_type: client_credentials
+        request_body_json: {}
+      record_selector:
+        type: RecordSelector
+        extractor:
+          type: DpathExtractor
+          field_path: []
+      paginator:
+        type: NoPagination
+  - type: DeclarativeStream
+    name: Content Metadata Access
+    primary_key: []
+    schema_loader:
+      type: InlineSchemaLoader
+      schema:
+        $schema: http://json-schema.org/draft-07/schema#
+        additionalProperties: true
+        properties: {}
+        type: object
+    retriever:
+      type: SimpleRetriever
+      requester:
+        type: HttpRequester
+        url_base: https://looker.dtcco.io:443/api/4.0
+        path: content_metadata_access
+        http_method: GET
+        request_parameters: {}
+        request_headers: {}
+        authenticator:
+          type: OAuthAuthenticator
+          client_id: '{{ config[''client_id''] }}'
+          client_secret: '{{ config[''client_secret''] }}'
+          refresh_request_body: {}
+          token_refresh_endpoint: https://looker.dtcco.io:443/api/4.0/login
+          grant_type: client_credentials
+        request_body_json: {}
+      record_selector:
+        type: RecordSelector
+        extractor:
+          type: DpathExtractor
+          field_path: []
+      paginator:
+        type: NoPagination
+  - type: DeclarativeStream
+    name: Dashboard
+    primary_key: []
+    schema_loader:
+      type: InlineSchemaLoader
+      schema:
+        $schema: http://json-schema.org/schema#
+        properties:
+          can:
+            properties:
+              copy:
+                type: boolean
+              create:
+                type: boolean
+              destroy:
+                type: boolean
+              download:
+                type: boolean
+              import:
+                type: boolean
+              index:
+                type: boolean
+              move:
+                type: boolean
+              recover:
+                type: boolean
+              render:
+                type: boolean
+              run:
+                type: boolean
+              schedule:
+                type: boolean
+              see_aggregate_table_lookml:
+                type: boolean
+              see_lookml:
+                type: boolean
+              show:
+                type: boolean
+              update:
+                type: boolean
+            type: object
+          content_metadata_id:
+            type:
+              - 'null'
+              - string
+          description:
+            type: string
+          folder:
+            properties:
+              can:
+                properties:
+                  create:
+                    type: boolean
+                  destroy:
+                    type: boolean
+                  edit_content:
+                    type: boolean
+                  index:
+                    type: boolean
+                  move_content:
+                    type: boolean
+                  save_shared_space_as_embed_user:
+                    type: boolean
+                  show:
+                    type: boolean
+                  update:
+                    type: boolean
+                type: object
+              child_count:
+                type: number
+              content_metadata_id:
+                type:
+                  - 'null'
+                  - string
+              created_at:
+                type:
+                  - 'null'
+                  - string
+              creator_id:
+                type:
+                  - 'null'
+                  - string
+              external_id:
+                type: string
+              id:
+                type: string
+              is_embed:
+                type: boolean
+              is_embed_shared_root:
+                type: boolean
+              is_embed_users_root:
+                type: boolean
+              is_personal:
+                type: boolean
+              is_personal_descendant:
+                type: boolean
+              is_shared_root:
+                type: boolean
+              is_users_root:
+                type: boolean
+              name:
+                type: string
+              parent_id:
+                type:
+                  - 'null'
+                  - string
+            type: object
+          hidden:
+            type: boolean
+          id:
+            type: string
+          model:
+            properties:
+              id:
+                type: string
+              label:
+                type: string
+            type:
+              - object
+              - 'null'
+          preferred_viewer:
+            type:
+              - 'null'
+              - string
+          readonly:
+            type: boolean
+          slug:
+            type: string
+          title:
+            type: string
+          user_id:
+            type:
+              - 'null'
+              - string
+        type: object
+    retriever:
+      type: SimpleRetriever
+      requester:
+        type: HttpRequester
+        url_base: https://looker.dtcco.io:443/api/4.0
+        path: dashboards
+        http_method: GET
+        request_parameters: {}
+        request_headers: {}
+        authenticator:
+          type: OAuthAuthenticator
+          client_id: '{{ config[''client_id''] }}'
+          client_secret: '{{ config[''client_secret''] }}'
+          refresh_request_body: {}
+          token_refresh_endpoint: https://looker.dtcco.io:443/api/4.0/login
+          grant_type: client_credentials
+        request_body_json: {}
+      record_selector:
+        type: RecordSelector
+        extractor:
+          type: DpathExtractor
+          field_path: []
+      paginator:
+        type: NoPagination
+  - type: DeclarativeStream
+    name: Datagroups
+    primary_key: []
+    schema_loader:
+      type: InlineSchemaLoader
+      schema:
+        $schema: http://json-schema.org/schema#
+        properties:
+          can:
+            properties:
+              index:
+                type: boolean
+              show:
+                type: boolean
+              update:
+                type: boolean
+            type: object
+          created_at:
+            type: number
+          id:
+            type: string
+          model_name:
+            type: string
+          name:
+            type: string
+          stale_before:
+            type:
+              - 'null'
+              - number
+          trigger_check_at:
+            type:
+              - 'null'
+              - number
+          trigger_error:
+            type:
+              - 'null'
+              - string
+          trigger_value:
+            type:
+              - 'null'
+              - string
+        type: object
+    retriever:
+      type: SimpleRetriever
+      requester:
+        type: HttpRequester
+        url_base: https://looker.dtcco.io:443/api/4.0
+        path: datagroups
+        http_method: GET
+        request_parameters: {}
+        request_headers: {}
+        authenticator:
+          type: OAuthAuthenticator
+          client_id: '{{ config[''client_id''] }}'
+          client_secret: '{{ config[''client_secret''] }}'
+          refresh_request_body: {}
+          token_refresh_endpoint: https://looker.dtcco.io:443/api/4.0/login
+          grant_type: client_credentials
+        request_body_json: {}
+      record_selector:
+        type: RecordSelector
+        extractor:
+          type: DpathExtractor
+          field_path: []
+      paginator:
+        type: NoPagination
+spec:
+  connection_specification:
+    $schema: http://json-schema.org/draft-07/schema#
+    type: object
+    required:
+      - client_id
+      - client_secret
+    properties:
+      client_id:
+        type: string
+        title: Client ID
+        airbyte_secret: true
+        order: 0
+      client_secret:
+        type: string
+        title: Client secret
+        airbyte_secret: true
+        order: 1
+    additionalProperties: true
+  type: Spec
+metadata:
+  autoImportSchema:
+    ColorCollection: true
+    Connection: true
+    ContentMetadata: true
+    Content Metadata Access: true
+    Dashboard: true
+    Datagroups: true
