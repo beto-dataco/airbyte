@@ -72,6 +72,12 @@ definitions:
     $parameters:
       name: "dashboards"
       path: "/dashboards"
+  datagroups_stream:
+    $ref: "#/definitions/datagroups_stream"
+    primary_key: "id"
+    $parameters:
+      name: "datagroups_stream"
+      path: "/datagroups"
   deal_unqualified_reasons_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
