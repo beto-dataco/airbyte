@@ -65,128 +65,162 @@ definitions:
     $parameters:
       name: "content_metadata_access"
       path: "/content_metadata_access"
-
   dashboards_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
       name: "dashboards"
       path: "/dashboards"
+  dashboard_elements_stream:
+    $ref: "#/definitions/base_stream"
+    primary_key: "id"
+    $parameters:
+      name: "dashboard_elements_stream"
+      path: "/dashboards/{dashboard_id}/dashboard_elements"
+  dashboard_filters_stream:
+    $ref: "#/definitions/base_stream"
+    primary_key: "id"
+    $parameters:
+      name: "dashboard_filters_stream"
+      path: "/dashboards/{dashboard_id}/dashboard_filters"
+  dashboard_layouts_stream:
+    $ref: "#/definitions/base_stream"
+    primary_key: "id"
+    $parameters:
+      name: "dashboard_layouts_stream"
+      path: "/dashboards/{dashboard_id}/dashboard_layouts"
   datagroups_stream:
-    $ref: "#/definitions/datagroups_stream"
+    $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
       name: "datagroups_stream"
       path: "/datagroups"
-  deal_unqualified_reasons_stream:
+  folders_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
-      name: "deal_unqualified_reasons"
-      path: "/deal_unqualified_reasons"
-  deals_stream:
+      name: "folders_stream"
+      path: "/folders"
+  groups_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
-      name: "deals"
-      path: "/deals"
-
-  leads_stream:
+      name: "groups_stream"
+      path: "/groups"
+  homepages_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
-      name: "leads"
-      path: "/leads"
-  lead_conversions_stream:
+      name: "homepages_stream"
+      path: "/primary_homepages_sections"
+  integration_hubs_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
-      name: "lead_conversions"
-      path: "/lead_conversions"
-  lead_sources_stream:
+      name: "integration_hubs_stream"
+      path: "/integration_hubs"
+  integrations_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
-      name: "lead_sources"
-      path: "/lead_sources"
-  lead_unqualified_reasons_stream:
+      name: "integrations_stream"
+      path: "/integrations"
+  lookml_dashboards_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
-      name: "lead_unqualified_reasons"
-      path: "/lead_unqualified_reasons"
-  loss_reasons_stream:
+      name: "lookml_dashboards_stream"
+      path: "/looks"
+  lookml_models_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
-      name: "loss_reasons"
-      path: "/loss_reasons"
-  notes_stream:
+      name: "lookml_models_stream"
+      path: "/lookml_models"
+  run_look_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
-      name: "notes"
-      path: "/notes"
-  orders_stream:
+      name: "run_look_stream"
+      path: "/looks/{look_id}/run/{result_format}"
+  project_files_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
-      name: "orders"
-      path: "/orders"
-  pipelines_stream:
+      name: "project_files_stream"
+      path: "/projects/{project_id}/files"
+  git_branches_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
-      name: "pipelines"
-      path: "/pipelines"
-  products_stream:
+      name: "git_branches_stream"
+      path: "/projects/{project_id}/git_branches"
+  query_history_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
-      name: "products"
-      path: "/products"
-  stages_stream:
+      name: "query_history_stream"
+      path: "/running_queries"
+  roles_model_sets_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
-      name: "stages"
-      path: "/stages"
-  tags_stream:
+      name: "roles_model_sets_stream"
+      path: "/model_sets"
+  roles_permission_sets_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
-      name: "tags"
-      path: "/tags"
-  tasks_stream:
+      name: "roles_permission_sets_stream"
+      path: "/permission_sets"
+  roles_permissions_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
-      name: "tasks"
-      path: "/tasks"
-  text_messages_stream:
+      name: "roles_permissions_stream"
+      path: "/permissions"
+  roles_role_groups_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
-      name: "text_messages"
-      path: "/text_messages"
-  users_stream:
+      name: "roles_role_groups_stream"
+      path: "/roles/{role_id}/groups"
+  scheduled_plans_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
-      name: "users"
-      path: "/users"
-  visit_outcomes_stream:
+      name: "scheduled_plans_stream"
+      path: "/scheduled_plans"
+  user_attribute_group_value_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
-      name: "visit_outcomes"
-      path: "/visit_outcomes"
-  visits_stream:
+      name: "user_attribute_group_value_stream"
+      path: "/users/{user_id}/attribute_values"
+  user_login_lockouts_stream:
     $ref: "#/definitions/base_stream"
     primary_key: "id"
     $parameters:
-      name: "visits"
-      path: "/visits"
+      name: "user_login_lockouts_stream"
+      path: "/user_login_lockouts"
+  user_web_login_sessions_stream:
+    $ref: "#/definitions/base_stream"
+    primary_key: "id"
+    $parameters:
+      name: "user_web_login_sessions_stream"
+      path: "/users/{user_id}/sessions"
+  versions_stream:
+    $ref: "#/definitions/base_stream"
+    primary_key: "id"
+    $parameters:
+      name: "versions_stream"
+      path: "/versions"
+  workspaces_stream:
+    $ref: "#/definitions/base_stream"
+    primary_key: "id"
+    $parameters:
+      name: "workspaces_stream"
+      path: "/workspaces"
 
 streams:
   - "#/definitions/call_outcomes_stream"
